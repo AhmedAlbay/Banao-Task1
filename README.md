@@ -2,8 +2,10 @@
 
 ## Screenshots
 
-![Screenshot 1](/Screenshot1.jpg)
-![Screenshot 2](/Screenshot2.jpg)
+![Screenshot 1](/![Uploading screen1.jpg…]()
+)
+![Screenshot 2](/![Uploading screen2.jpg…]()
+)
 
 ## Demo
 
