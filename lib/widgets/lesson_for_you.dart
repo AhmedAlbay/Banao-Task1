@@ -1,6 +1,9 @@
 import 'package:banao/widgets/lesson_item.dart';
 import 'package:flutter/material.dart';
 
+import '../models/Lessonmodel.dart';
+import '../service/get_lesson.dart';
+
 class LessonForYou extends StatelessWidget {
   const LessonForYou({super.key});
 
@@ -34,14 +37,27 @@ class LessonForYou extends StatelessWidget {
             height: 35,
           ),
           SizedBox(
-            height: 280,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) => const LessonItem(),
-            ),
-          ),
+            height: 270,
+            child: FutureBuilder<List<LessonModel>>(
+                future: LessonService().getLesson(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<LessonModel> lesson = snapshot.data!;
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: lesson.length,
+                      itemBuilder: (context, index) => LessonItem(
+                        lesson: lesson[index],
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
+          )
         ],
       ),
     );
